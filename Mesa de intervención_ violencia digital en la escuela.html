@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mesa de intervención: violencia digital en la escuela</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eaf5fc;--card:#fff;--ink:#0a2c4a;--mut:#4a6a85;--pri:#1b86d0;--pri2:#0c5a99;--soft:#d6ecfa;--line:#bcdcf1;--warn:#fff3cf;--warnink:#6a4700;--on:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#071d2d;--card:#0e2f45;--ink:#e5f3fc;--mut:#9ab8cd;--pri:#59b6ee;--pri2:#8ccff6;--soft:#12405c;--line:#1f4e6d;--warn:#392f10;--warnink:#f2d88a;--on:#04202f}}
+:root[data-theme="dark"]{--bg:#071d2d;--card:#0e2f45;--ink:#e5f3fc;--mut:#9ab8cd;--pri:#59b6ee;--pri2:#8ccff6;--soft:#12405c;--line:#1f4e6d;--warn:#392f10;--warnink:#f2d88a;--on:#04202f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;line-height:1.2;margin:0}
+.wrap{max-width:980px;margin:0 auto;padding:20px 18px 48px}
+header{background:linear-gradient(135deg,#1b86d0,#0c4f87);color:#fff;border-radius:28px;padding:30px 30px 26px;margin-bottom:22px}
+header h1{font-size:clamp(1.7rem,4vw,2.4rem)}
+header p{margin:10px 0 0;max-width:62ch;opacity:.95}
+.btn{font:inherit;font-weight:600;border:0;border-radius:999px;padding:11px 22px;background:var(--pri);color:var(--on);cursor:pointer}
+.btn:hover{background:var(--pri2);color:#fff}
+.btn.alt{background:var(--soft);color:var(--pri2)}
+.btn.alt:hover{background:var(--line)}
+button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--pri2);outline-offset:2px}
+.choose-intro{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.choose-intro p{margin:0;max-width:56ch;color:var(--mut)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.pick{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.pick h2{font-size:1.35rem}
+.pick p{margin:0;color:var(--mut);flex:1}
+.tag{display:inline-block;background:var(--soft);color:var(--pri2);border-radius:999px;padding:3px 13px;font-size:.88rem;font-weight:600;align-self:flex-start}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tabs button{font:inherit;font-weight:600;border:2px solid var(--line);background:var(--card);color:var(--mut);border-radius:999px;padding:8px 18px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--pri);border-color:var(--pri);color:var(--on)}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:26px;padding:26px 28px}
+.panel h2{font-size:1.7rem;margin:6px 0 16px}
+.panel h3{font-size:1.1rem;margin-bottom:6px}
+.box{background:var(--soft);border-radius:18px;padding:16px 20px;margin-bottom:16px}
+.box p{margin:0;max-width:70ch}
+.rnd{border-left:5px solid var(--pri);padding:2px 0 2px 16px;margin:0 0 16px}
+.rnd b{display:block;color:var(--pri2);margin-bottom:2px}
+.rnd p{margin:0;max-width:70ch}
+details{background:var(--bg);border-radius:14px;padding:10px 16px}
+summary{cursor:pointer;font-weight:600;color:var(--pri2)}
+ul.rules{margin:10px 0 2px;padding-left:20px}
+ol.ruta{margin:0;padding-left:22px;max-width:72ch}
+ol.ruta li{margin-bottom:10px}
+ol.ruta span{color:var(--mut);font-size:.9rem}
+.env{text-align:center;padding:26px 10px}
+.env .ico{width:130px;height:88px;margin:0 auto 16px;background:var(--soft);border:3px solid var(--pri);border-radius:12px;position:relative;overflow:hidden}
+.env .ico::before{content:"";position:absolute;left:0;right:0;top:-2px;height:60px;background:var(--line);clip-path:polygon(0 0,100% 0,50% 100%)}
+.env p{margin:0 auto 16px;max-width:46ch;color:var(--mut)}
+.src{font-size:.88rem;color:var(--mut);margin:-4px 0 16px;max-width:70ch}.src a{color:var(--pri2)}
+.note{background:var(--warn);color:var(--warnink);border-radius:14px;padding:10px 16px;margin:0 0 16px}
+.reveal{animation:open .45s ease-out}
+@keyframes open{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+.chk label{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer;max-width:72ch}
+.chk input{width:20px;height:20px;margin-top:3px;accent-color:var(--pri);flex:none}
+.chk span{color:var(--mut);font-size:.92rem}
+textarea{width:100%;min-height:76px;font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:10px 12px;resize:vertical;margin:4px 0 12px}
+label.f{font-weight:600;display:block}
+.foot{margin-top:20px;color:var(--mut);font-size:.9rem;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+.foot button{font:inherit;font-size:.9rem;background:none;border:0;color:var(--pri2);text-decoration:underline;cursor:pointer;padding:0}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){.reveal{animation:none}}
+@media (max-width:520px){.panel{padding:20px 18px}header{padding:24px 20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Mesa de intervención</h1>
+<p>Violencia digital en la escuela. Cada equipo resuelve una situación con su propio criterio y después contrasta su plan con la Guía Provincial de Orientación para la Intervención en las Instituciones Educativas (La Pampa, 2026).</p>
+</header>
+
+<section id="home">
+<div class="choose-intro">
+<p>Elijan una situación o dejen que el azar decida. Al confirmar, las otras desaparecen.</p>
+<button class="btn alt" id="rand">Sortear una situación</button>
+</div>
+<div class="grid" id="picks"></div>
+</section>
+
+<section id="work" hidden>
+<div class="bar"><span class="tag" id="wtag"></span></div>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="panel" id="panel" role="tabpanel"></div>
+<div class="foot"><span>Casos ficticios. La IA propone y el equipo decide.</span><button id="reset">Cambiar situación (docente)</button></div>
+</section>
+</div>
+
+<script>
+var RULES=["Cada equipo es el equipo de gestión de una escuela ficticia y piensa su plan con su propio criterio. La guía de La Pampa se usa después, para contrastarlo, porque los casos ocurrieron en otra jurisdicción.","Las rondas 1 y 2 se resuelven sin IA. La IA se usa solo en la ronda 3, para redactar el borrador que pide el sobre.","Se usan solo estos casos ficticios: sin datos ni imágenes reales de nadie, y sin generar ni modificar imágenes de personas.","La IA propone, pero decidir qué se comunica, a quién se notifica o si se denuncia es una responsabilidad humana e institucional."];
+var RUTA=[["Avisar al equipo de gestión y hacer un registro escrito objetivo: fecha, horario, lugar, expresiones entre comillas, sin juicios de valor.","p. 61"],["Dar aviso a Coordinación o Secretaría Técnica y a los Equipos de Apoyo.","p. 61"],["Contener por separado a cada estudiante, siempre con personas adultas, sin la dicotomía víctima y victimario.","p. 36"],["Avisar a las familias.","p. 37"],["Notificar a la Unidad Local o Regional de Protección de Derechos, con informe (Anexo B).","p. 62"],["Si hay presunto delito, denunciar en comisaría, UFGNyA o Fiscalía (también online). Urgente: 101. Con datos laborales, no personales.","p. 62"],["Abordar la situación con el grupo y con el Acuerdo Escolar de Convivencia.","p. 37"],["Comunicar con cuidado: resguardar identidades y no colaborar con la difusión.","Cap. 4, pp. 85-90"]];
+var CHK=[["Es objetivo","Describe hechos, sin juicios de valor ni adjetivos que acusen (p. 61)."],["No estigmatiza","No etiqueta ni deja entender culpas (pp. 36-37)."],["Resguarda identidades","No nombra estudiantes ni da datos que permitan reconocerlos (Cap. 4)."],["No reproduce el daño","No describe el contenido de las imágenes."],["No promete ni inventa","Nada de “se sancionará a los culpables”, ni leyes, teléfonos o procedimientos que no estén en la guía."],["Invita a la corresponsabilidad","El tono convoca a las familias a trabajar con la escuela."]];
+var L1=["Infobae: la denuncia y el reclamo","https://www.infobae.com/sociedad/2026/10/07/denunciaron-a-alumnos-de-un-colegio-por-crear-imagenes-de-companeras-desnudas-con-ia-y-venderlas-en-internet/"],L2=["Infobae: habló la madre de una alumna","https://www.infobae.com/sociedad/2026/10/07/el-colegio-sabia-esto-hace-un-mes-hablo-la-madre-de-una-de-las-alumnas-afectadas-por-las-imagenes-falsas-creadas-con-ia-en-lomas-de-zamora/"],L3=["A24: protesta y medidas","https://www.a24.com/policiales/denuncian-que-alumnos-usaron-ia-alterar-fotos-sus-companeras-y-las-difundieron-n1604127"];
+var C=[
+{t:"Lo supimos por los chicos",tag:"Imágenes falsas con IA",teaser:"Unas 40 alumnas, un catálogo con nombres y apellidos y cuatro estudiantes señalados.",src:[L1,L3],
+ctx:"Es lunes. Varias alumnas de distintos años le cuentan a una preceptora que circulan imágenes falsas de ellas, hechas con IA a partir de fotos de sus redes y alteradas para parecer íntimas. Serían unas 40 alumnas. Según cuentan, hay un catálogo con nombre y apellido, el material se compartió con otros colegios y se publicó en páginas para adultos, y algunas imágenes se vendían. Señalan a cuatro estudiantes de 3.er año. Lucía, una de las afectadas, dice que uno de ellos era su mejor amigo. En el recreo, un docente, para evitar que se siga hablando del tema, les pide a las chicas que “no comenten nada”. Varias lloran.",
+r1:"¿Cómo clasifican lo ocurrido: ciberacoso, vulneración de derechos o presunto delito? Justifiquen su clasificación y digan qué criterios de gravedad usaron. ¿Qué opinan de la indicación de “no comentar nada”?",
+r2:"Armen su plan de actuación en el recuadro: qué se hace, quién lo hace, en qué orden y por qué. Piensen en Lucía y las demás afectadas, en los cuatro señalados, en las familias y en qué conviene dejar registrado. Resuelvan también el dilema. Todavía no consulten la guía.",dil:"Separar de inmediato a los cuatro señalados de las afectadas, aunque todavía no haya decisión institucional ni investigación, o mantenerlos en el curso hasta que se definan las medidas. Decidan, justifiquen su decisión y digan qué costo asumen con su elección.",
+s:{h:"Mensaje a la dirección, 11:40",m:"“Nos enteramos por los chicos, no por ustedes. ¿Desde cuándo lo saben? Mi hija sigue en el mismo curso que los que hicieron esto. Quiero una respuesta hoy.”",n:"En el recreo, un estudiante dijo ante varios compañeros: “Es un chiste, ni siquiera son reales.”",r:"Pídanle a la IA un borrador de respuesta a la madre, audítenlo con la lista de verificación y entreguen la versión final. Respondan también al argumento «no son reales». ¿Qué de lo decidido antes cambia?"}},
+{t:"La transferencia",tag:"Extorsión entre estudiantes",teaser:"Dos de los cuatro involucrados se piden plata y uno amenaza con “mostrarlo al director”.",src:[L2,L1],
+ctx:"Hace unos días se supo que cuatro estudiantes de 3.er año de una escuela secundaria habrían creado con IA imágenes falsas de contenido sexual de unas 40 compañeras y las habrían difundido y vendido. Hoy, un estudiante le cuenta a un profesor, casi en secreto, que dos de los cuatro, Tomás y Franco, se pelearon por plata. Tomás le exige dinero a Franco y, si no lo recibe, amenaza con “mostrarlo al director”. El estudiante muestra capturas del chat y pide: “No digas que fui yo”.",
+r1:"¿Qué situación están enfrentando? ¿Puede el profesor guardar el secreto? ¿Quién necesita protección? Respondan sin usar «víctima» y «victimario».",
+r2:"Armen su plan de actuación en el recuadro: qué se hace, quién lo hace, en qué orden y por qué. Piensen en el profesor, en el estudiante que avisó, en Tomás y Franco, y en qué familias se avisa y en qué orden. Resuelvan también el dilema. Todavía no consulten la guía.",dil:"El estudiante pidió que no se sepa quién avisó, pero lo que cuenta incluye un presunto delito y obliga a actuar. ¿Qué le prometen y qué no le pueden prometer? ¿Cómo lo protegen sin dejar de actuar?",
+s:{h:"Mensaje de la madre de Franco, 21:15",m:"“Mi hijo me pidió plata y no me quiere decir para qué. Está muy raro. ¿Pasó algo en el colegio?”",n:"Las familias de las alumnas afectadas todavía no recibieron ningún aviso de la escuela.",r:"Pídanle a la IA un borrador de mensaje a la madre de Franco, para citarla a la escuela sin adelantar detalles por escrito. Audítenlo y entreguen la versión final. Agreguen qué se suma al registro y a quién más se notifica. ¿Qué de lo decidido antes cambia?"}},
+{t:"La escuela desbordada",tag:"Crisis institucional",teaser:"Un mes de silencio, una nota en el cuaderno y una sentada en la puerta.",src:[L2,L1,L3],
+ctx:"Así respondió la escuela hasta ahora, según reconstruyeron las familias: supo que cuatro estudiantes de 3.er año habrían creado y difundido con IA imágenes falsas de contenido sexual de unas 40 compañeras; avisó solo a las familias de los estudiantes señalados; aplicó como sanción una nota en el cuaderno de comunicaciones; y no informó a las familias de las afectadas. Un mes después, ellas se enteraron por sus hijas. Al pedir una reunión, la dirección dijo que estaba ocupada y luego sostuvo que no tenía herramientas para intervenir y que no podía expulsar a nadie. Hoy hay una sentada de estudiantes y familias en la puerta y llegan supervisores de Educación. Las imágenes ya circularon por otros colegios, así que cambiar de escuela no es una salida. En el grupo de WhatsApp de las familias circula una lista con los nombres de los estudiantes “responsables”, y alguien la subió a Instagram. Un periodista llama a la dirección.",
+r1:"Evalúen la primera respuesta de la escuela: ¿qué pasos se omitieron o se hicieron mal? ¿Pueden y deben intervenir aunque haya pasado en entornos digitales? ¿Con qué argumentos?",
+r2:"Armen su plan de actuación en el recuadro: qué se hace, quién lo hace, en qué orden y por qué. Piensen en los señalados, en las afectadas, en el periodista y en la lista que circula. Incluyan tres puntos que el comunicado a las familias debe tener y dos que no. Resuelvan también el dilema. Todavía no consulten la guía.",dil:"Las familias de las afectadas exigen saber quiénes son los responsables, y los señalados también son menores a quienes la escuela debe cuidar. ¿Qué información se da, a quién y qué se reserva?",
+s:{h:"Correo de la familia de uno de los estudiantes de la lista",m:"“Vamos a denunciar a la escuela por exponer a nuestro hijo. Su nombre circula en grupos y en redes desde hace horas.”",n:"La lista ya fue reenviada a otros grupos.",r:"Pídanle a la IA un borrador del comunicado a las familias que incorpore esta novedad. Audítenlo y entreguen la versión final. Ajusten lo decidido antes: ¿qué cambia?"}}
+];
+function PLAN(){return "<h3>Nuestro plan de actuación</h3><textarea id='plan' rows='7' style='min-height:170px' aria-label='Plan de actuación'></textarea><p class='src'>Entreguen el plan por escrito antes de desbloquear el contraste con la guía.</p>"}
+var TABS=["Situación","Contraste con la guía","Sobre","Auditoría y bitácora"];
+var sel=null,opened=false,ruta=false,tab=0,ST={};
+var $=function(s){return document.querySelector(s)};
+function save(){try{localStorage.setItem("mesa-intervencion",JSON.stringify({sel:sel,opened:opened,ruta:ruta}))}catch(e){}}
+function load(){try{var d=JSON.parse(localStorage.getItem("mesa-intervencion")||"null");if(d&&C[d.sel]){sel=d.sel;opened=!!d.opened;ruta=!!d.ruta}}catch(e){}}
+function choose(i){sel=i;opened=false;ruta=false;tab=0;ST={};save();render()}
+function panel(){
+var c=C[sel],h="";
+if(tab==0){
+h="<h2>"+c.t+"</h2><div class='box'><h3>Contexto</h3><p>"+c.ctx+"</p></div>"+"<p class='src'>Escuela y personas ficticias, basadas en un caso reciente cuyas denuncias siguen en investigación. Fuentes: "+c.src.map(function(x){return "<a href='"+x[1]+"' target='_blank' rel='noopener'>"+x[0]+"</a>"}).join(", ")+".</p>"+
+"<div class='rnd'><b>Ronda 1: clasificar</b><p>"+c.r1+"</p></div>"+
+"<div class='rnd'><b>Ronda 2: actuar</b><p>"+c.r2+"</p></div><div class='note'><b>Dilema.</b> "+c.dil+"</div>"+PLAN()+
+"<details><summary>Reglas de la actividad</summary><ul class='rules'>"+RULES.map(function(r){return "<li>"+r+"</li>"}).join("")+"</ul></details>";
+}else if(tab==1){
+h=!ruta?"<div class='env'><h2>Contraste bloqueado</h2><p>Primero armen su plan de actuación con su propio criterio. Cuando lo entreguen, se desbloquea la ruta de la guía para contrastarlo.</p><button class='btn' id='unl'>Ya entregamos la ronda 2</button></div>":"<h2>Ruta de actuación de la guía</h2><p>Esta ruta sale de la guía de La Pampa y los casos ocurrieron en otra jurisdicción. Contrasten con su plan: ¿qué agregarían, quitarían o reordenarían? ¿Qué cambiaría si el caso ocurriera en una escuela pampeana?</p><ol class='ruta'>"+RUTA.map(function(r){return "<li>"+r[0]+" <span>("+r[1]+")</span></li>"}).join("")+"</ol>";
+}else if(tab==2){
+if(!opened){h="<div class='env'><div class='ico' aria-hidden='true'></div><h2>Sobre cerrado</h2><p>Cuando terminen las rondas 1 y 2, entreguen por escrito lo decidido. Ábranlo solo cuando la coordinación lo indique.</p><button class='btn' id='open'>Abrir sobre</button></div>"}
+else{var s=c.s;h="<div class='reveal'><h2>Llegó una novedad</h2><div class='box'><h3>"+s.h+"</h3><p>"+s.m+"</p></div>"+(s.n?"<p class='note'>"+s.n+"</p>":"")+"<div class='rnd'><b>Ronda 3: redactar con IA y auditar</b><p>"+s.r+"</p></div></div>"}
+}else{
+h="<h2>Auditoría y bitácora</h2><h3>Lista de verificación del borrador</h3><div class='chk'>"+CHK.map(function(x,i){return "<label><input type='checkbox' id='c"+i+"'><div><b>"+x[0]+"</b><br><span>"+x[1]+"</span></div></label>"}).join("")+"</div><h3 style='margin-top:22px'>Bitácora de IA</h3>"+
+"<label class='f' for='b1'>Qué le pidieron a la IA</label><textarea id='b1'></textarea><label class='f' for='b2'>Qué respondió</label><textarea id='b2'></textarea><label class='f' for='b3'>Qué corrigieron y con qué criterio de la lista</label><textarea id='b3'></textarea>";
+}
+$("#panel").innerHTML=h;
+{[].forEach.call(document.querySelectorAll("#panel input,#panel textarea"),function(e){var v=ST[e.id];if(e.type=='checkbox')e.checked=!!v;else if(v)e.value=v;e.oninput=e.onchange=function(){ST[e.id]=e.type=='checkbox'?e.checked:e.value}})}
+var u=$("#unl");if(u)u.onclick=function(){ruta=true;save();render()};
+var o=$("#open");if(o)o.onclick=function(){opened=true;save();panel()};
+}
+function render(){
+var home=sel===null;
+$("#home").hidden=!home;$("#work").hidden=home;
+if(home){
+$("#picks").innerHTML=C.map(function(c,i){return "<div class='pick'><span class='tag'>"+c.tag+"</span><h2>"+c.t+"</h2><p>"+c.teaser+"</p><button class='btn' data-i='"+i+"'>Elegir esta situación</button></div>"}).join("");
+[].forEach.call(document.querySelectorAll("#picks .btn"),function(b){b.onclick=function(){choose(+b.dataset.i)}});
+return;
+}
+$("#wtag").textContent=C[sel].tag;
+$("#tabs").innerHTML=TABS.map(function(t,i){return "<button role='tab' aria-selected='"+(i==tab)+"' data-t='"+i+"'>"+t+(i==1&&!ruta?" 🔒":"")+"</button>"}).join("");
+[].forEach.call(document.querySelectorAll("#tabs button"),function(b){b.onclick=function(){tab=+b.dataset.t;render()}});
+panel();
+}
+$("#rand").onclick=function(){choose(Math.floor(Math.random()*C.length))};
+$("#reset").onclick=function(){sel=null;opened=false;ruta=false;tab=0;save();render()};
+load();render();
+</script>
+</body>
+</html>
